@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'css/stylescar.css' %}">
+  <title>Arduino Motor Car</title>
+</head>
+
+<body>
+  <h1>How to Build an Arduino Bluetooth Car</h1>
+  <div class="step">
+    <h2 class="step-title">Step 1: Gather the Required Materials</h2>
+    <div class="step-description">
+      <p>First, gather the necessary materials:</p>
+      <ul>
+        <li>Arduino board</li>
+        <li>Motor driver module</li>
+        <li>Bluetooth module</li>
+        <li>Chassis</li>
+        <li>Wheels</li>
+        <li>4 TT Gear Motors</li>
+        <li>Battery</li>
+        <li>Battery Holder</li>
+        <li>Jumper wires</li>
+      </ul>
+    </div>
+    <img src="{% static 'images/step1.jpg' %}" alt="Step1">
+  </div>
+
+  <div class="step">
+    <h2 class="step-title">Step 2: Take your TT motors</h2>
+    <div class="step-description">
+      <p>First, you will need 4 TT Motors. Sometimes the motor doesn’t come with wire attached. <br>
+        So, In that case, you have to attach the wire to the motors with a soldering iron.</p>
+    </div>
+    <img src="{% static 'images/Step2.jpg' %}" alt="Step 3">
+  </div>
+
+   <div class="step">
+    <h2 class="step-title">Step 3: Take your Chassis</h2>
+    <div class="step-description">
+      <p>Now take a Piece of Plywood dimension of 13CM x 10CM. Now use a Glue Gun and place the motor on the Plywood corners.<br>
+      Use the same technique and connect all 4 Motors on the chassis.</p>
+    </div>
+    <img src="{% static 'images/step3.jpg' %}" alt="Step 3">
+  </div>
+
+   <div class="step">
+    <h2 class="step-title">Step 4: Take your Arduino and Motor Shield</h2>
+    <div class="step-description">
+      <p>First take Arduino Uno and them attach it on the Chassis. Many people use Hot Glue to attach but I don’t recommend that at all. The coper traces under the PCB may be damaged for the hot glue.<br>
+      So, I used Double sided tape for attaching the Board.<br><br>
+      For controlling the Motors we will definitely need a motor driver. The L298n and the L293D motor drivers are most commonly used with Arduino.<br>
+      All these drivers have an inbuilt H-Bridge inside in it for controlling the motors..</p>
+    </div>
+    <img src="{% static 'images/step4.jpg' %}" alt="Step 4">
+  </div>
+
+  <div class="step">
+    <h2 class="step-title">Step 5: Connect the Wires to the Shield</h2>
+    <div class="step-description">
+      <p>Here is the Left and the Right side view of the Car. You can see the connection more clearly here. If you change the motor wires then the motor rotation will also change.<br>
+       Just connect all the motor as shown in the picture and will work just fine.</p>
+    </div>
+    <img src="{% static 'images/step5.jpg' %}" alt="Step 5">
+  </div>
+
+   <div class="step">
+    <h2 class="step-title">Step 6: Take your batteries</h2>
+    <div class="step-description">
+      <p>I have used 18650 Batteries for Bluetooth Control Robot. You can also use Li-Po Batteries or Lead Acid Batteries as well. My recommendation is to go with Li-ion or Li-Po Battery because this is most commonly used in DIY Projects.<br>
+        Nowadays you can get 18650 Batteries as cheap as 2$. And these batteries will give you the most power.<br><br>
+        Connect the Battery wires with the EXT_PWR Terminal Block. I have attached Double-sided tape with the battery holder and connected with the Chassis.
+        </p>
+    </div>
+    <img src="{% static 'images/step6.jpg' %}" alt="Step 6">
+  </div>
+   <div class="step">
+    <h2 class="step-title">Step 7: Take your HC-05 Bluetooth Module</h2>
+    <div class="step-description">
+      <p>Now connect the HC-05 Bluetooth Module with the circuit. From the Table, you can see the connections.<br>
+      You will need 2 Female-Female Jumper wires for connecting the 5v(Vcc) and the GND.</p>
+    </div>
+    <img src="{% static 'images/step7.jpg' %}" alt="Step 7">
+    <p>The RX and the TX pins are covered with the Shield. So, we need to solder those pins.<br>
+       Now for connecting the RX and the TX Pins I cut the Male-Female wire and used the female part to connect with the Bluetooth Module. <br>
+       Next I soldered the end wires with the Arduino Pin 0 and Pin 3.</p>
+      <h4>Note: Please Disconnect the RX and the TX Pin when you are uploading the code to Arduino.</h4>
+  </div>
+
+ <div class="step">
+    <h2 class="step-title">Step 8: Take cable for Arduino</h2>
+    <div class="step-description">
+      <p>Next, connect your Arduino with your PC or MAC. After that, we will dive into the software section.</p>
+    </div>
+    <img src="{% static 'images/step8.jpg' %}" alt="Step 8">
+  </div>
+
+ <div class="step">
+    <h2 class="step-title">Step 9: Open Arduino IDE</h2>
+    <div class="step-description">
+      <p>Now, I have provided the code below. Just copy the code and paste it in your Arduino IDE.<br> 
+        Before uploading the code to Arduino we need to add a library to Arduino. Just go to the following.<br><br>
+        Sketch> Include Library> Manage Libraries…</p>
+    </div>
+    <img src="{% static 'images/step9.jpg' %}" alt="Step 9">
+    <p>Then Search for Adafruit Motor Shield Library(Adafruit has 2 Libraries for this topic V1 and V2.<br>
+       For our purpose we will only need the V1 library.) from the search bar. Now install the Library.</p>
+  </div>
+
+ <div class="step">
+    <h2 class="step-title">Step 10: Paste the code</h2>
+    <div class="step-description">
+      <p>#include AFMotor.h <br>
+        <br>
+        <br>
+        AF_DCMotor motor1(1, MOTOR12_1KHZ);<br>
+        AF_DCMotor motor2(2, MOTOR12_1KHZ);<br>
+        AF_DCMotor motor3(3, MOTOR34_1KHZ);<br>
+        AF_DCMotor motor4(4, MOTOR34_1KHZ);<br>
+        <br>
+        char command;<br>
+        <br>
+        void setup()<br>
+        {<br>
+          Serial.begin(9600); <br> 
+        }<br>
+        <br>
+        void loop(){<br>
+          if(Serial.available() > 0){<br>
+            command = Serial.read();<br>
+            Stop(); <br>
+            switch(command){<br>
+            case 'F':<br>
+              forward();<br>
+              break;<br>
+            case 'B':<br>
+               back();<br>
+              break;<br>
+            case 'L':<br>
+              left();<br>
+              break;<br>
+            case 'R':<br>
+              right();<br>
+              break;<br>
+            }<br>
+          }<br>
+        }<br>
+        <br>
+        void forward()<br>
+        {<br>
+          motor1.setSpeed(255); <br>
+          motor1.run(BACKWARD); <br>
+          motor2.setSpeed(255); <br>
+          motor2.run(FORWARD); <br>
+          motor3.setSpeed(255);<br>
+          motor3.run(FORWARD); <br>
+          motor4.setSpeed(255);<br>
+          motor4.run(FORWARD); <br>
+        }<br>
+        <br>
+        void back()<br>
+        {<br>
+          motor1.setSpeed(255);<br> 
+          motor1.run(FORWARD);<br> 
+          motor2.setSpeed(255); <br>
+          motor2.run(BACKWARD); <br>
+          motor3.setSpeed(255); <br>
+          motor3.run(BACKWARD); <br>
+          motor4.setSpeed(255); <br>
+          motor4.run(BACKWARD); <br>
+        }<br>
+        <br>
+        void left()<br>
+        {<br>
+          motor1.setSpeed(0); <br>
+          motor1.run(BACKWARD);<br>
+          motor2.setSpeed(0); <br>
+          motor2.run(FORWARD); <br>
+          motor3.setSpeed(255); <br>
+          motor3.run(FORWARD); <br> 
+          motor4.setSpeed(255); <br>
+          motor4.run(FORWARD); <br> 
+        }<br>
+        <br>
+        void right()<br>
+        {<br>
+          motor1.setSpeed(255); <br>
+          motor1.run(BACKWARD); <br>
+          motor2.setSpeed(255); <br>
+          motor2.run(FORWARD); <br>
+          motor3.setSpeed(0); <br>
+          motor3.run(FORWARD); <br>
+          motor4.setSpeed(0); <br>
+          motor4.run(FORWARD); <br>
+        }<br>
+        <br>
+        void Stop()<br>
+        {<br>
+          motor1.setSpeed(0); <br>
+          motor1.run(RELEASE);<br> 
+          motor2.setSpeed(0); <br>
+          motor2.run(RELEASE); <br>
+          motor3.setSpeed(0); <br>
+          motor3.run(RELEASE); <br>
+          motor4.setSpeed(0); <br>
+          motor4.run(RELEASE); <br>
+        }</p>
+    </div>
+  </div>
+
+ <div class="step">
+    <h2 class="step-title">Step 11: Attach the Batteries</h2>
+    <div class="step-description">
+      <p>Now  attach the 18650 Batteries in the 18650 Battery Holder. Before powering the car just check all the necessary connections like Battery Power +ve and -ve is connected or not, Bluetooth modules Polarity is right or different.<br>
+         A simple mistake can lead you to damage any modules. And turned on the Switch. Here you will see the L293D Motor Driver’s Green LED as well as the HC-05 Bluetooth Module’s RED LED will glow after turning it on.</p>
+    </div>
+    <img src="{% static 'images/step11.jpg' %}" alt="Step 11">
+  </div>
+
+ <div class="step">
+    <h2 class="step-title">Step 12: Install the app</h2>
+    <div class="step-description">
+      <p>Now you will need the app for controlling the car. You can download it into your phone from google play. The name of the app is: Bluetooth Rc controller<br>
+        At next open, the application then Click on the small gear button in the app. Then you will find an option called ‘Connect to Car’. After that, you have to select the correct Bluetooth option. <br>
+        For our case, it is HC-05 click on that.<br><br>
+        Now return to <a href="{% url 'home'%}">Home.</a></p> 
+    </div>
+    <img src="{% static 'images/step12.jpg' %}" alt="Step 12">
+  </div>
+  <button onclick="topFunction()" id="myBtn">Top</button>
+  <script>
+      var mybutton = document.getElementById("myBtn");
+      window.onscroll = function() {scrollFunction()};
+      function scrollFunction() {
+        if ( document.documentElement.scrollTop > 20) {
+          mybutton.style.display = "block";
+        } else {
+          mybutton.style.display = "none";
+        }
+      }
+      function topFunction() {
+        document.documentElement.scrollTop = 0;
+      }
+      </script>
+</body>
+</html>

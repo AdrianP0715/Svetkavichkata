@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <title>Make it with Arduino</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>ArduinoHub</h1>
+    </header>
+
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="{% url 'home'%}">Home</a>
+                <li><a href="{% url 'workers'%}">About us</a>
+                <li><a href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="hero">
+        <div class="container">
+            <h2>See good arduino project that you can build</h2>
+            <p>Explore the world of robotics and learn how to create good projects using Arduino. Get started on exciting projects and unleash your creativity!</p>
+        </div>
+    </section>
+    
+    <section id="about">
+        <div class="container">
+            <h2>About ArduinoHub</h2>
+            <p>The ArduinoHub is a website where you can see how to build robotic project with Arduino. The project are easy to make when you can see all the steps for building the projects you want!</p>
+            <p>With endless possibilities, the ArduinoHub opens up a world of exploration, experimentation, and innovation. Join the community of makers and enthusiasts today!</p>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <div class="project">
+                <img src="{% static 'images/ZEUS.jpg' %}"  alt="Project 1">
+                <h3>Remote Control Car</h3>
+                <p>Build a motor car that can be controlled wirelessly using a remote control.</p>
+                <a href="{% url 'arduinocar'%}" class="project-button">Start the project</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Arduino Motor Car. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
